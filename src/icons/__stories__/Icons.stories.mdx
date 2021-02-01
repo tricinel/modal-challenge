@@ -1,0 +1,34 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import {
+  BellIcon,
+  CheckIcon,
+  CloseIcon,
+  EmbedIcon,
+  InfoIcon,
+  LinkIcon,
+  WarningIcon
+} from '..';
+
+<Meta title="Components/Icons" component={CloseIcon} />
+
+# Icons
+
+Icons are ideal as a visual support for the different actions. You should rarely, if ever, use icons as stand alone.
+
+Install: `yarn add '@modal/icons`
+
+Usage: `import { CloseIcon } from '@modal/icons';`
+
+## Available icons
+
+<Canvas>
+  <Story name="Icons">
+    <BellIcon width="6em" />
+    <CheckIcon width="6em" />
+    <CloseIcon width="6em" />
+    <EmbedIcon width="6em" />
+    <InfoIcon width="6em" />
+    <LinkIcon width="6em" />
+    <WarningIcon width="6em" />
+  </Story>
+</Canvas>
