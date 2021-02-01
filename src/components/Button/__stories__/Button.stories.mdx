@@ -1,0 +1,190 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
+import Button from '..';
+import { Template, TemplateWithIcon, TemplateWithLongText, TemplateWithTextOverflow } from './Template';
+import ExampleOnPress from './Examples';
+
+<Meta title="Components/Button" component={Button} />
+
+# Button
+
+Buttons allow users to perform an action. They use the various statuses available throughout the component library to convey what type of information the user is going to do should they choose to press the button. Buttons are also a good way to call the attention of the user to what action they need to perform before they can continue, hence the name Call to Action (CTA).
+
+> **Buttons vs Links**
+>
+> Buttons should allow the user to perform an action, such as Save, Delete, Apply, while links should allow the user to navigate from page to page.
+
+Install: `yarn add '@modal/button`
+
+Usage: `import Button from '@modal/button';`
+
+## Content
+
+Buttons must have a visible label, be it in the form of the button text, or an icon with an appropriate `aria-label` property. Buttons accept a string as children, and also other components, e.g. an icon or an image.
+
+<Canvas>
+  <Story name="Simple button" args={{ action: 'neutral' }}>
+    {Template.bind({})}
+  </Story>
+  <Story name="Icon button" args={{ 'aria-label': 'Confirm' }}>
+    {TemplateWithIcon.bind({})}
+  </Story>
+</Canvas>
+
+## Accessibility
+
+If you choose to use an icon or an image as a child, be aware that an alternative text label must be provided to identify the button for accessibility. This should be added using one of the `aria-label` or `aria-labeledby` props.
+
+## Visual options
+
+### Status
+
+`Button` supports style props, which enable you to use theme variables for styling to ensure consistency with the other components.
+
+#### Confirmation
+
+A confirmation button is considered the main call to action button. It is meant to have a strong visual emphasis and should be reserved for actions that are essential to an experience. There should always be only one visible confirmation button per section.
+
+<Canvas>
+  <Story name="Confirmation" args={{ action: 'confirmation' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+#### Information
+
+An Information button is considered a secondary action button. It is meant to have a medium visual emphasis and should be used where the action requires less prominenance or where there are multiple buttons of the same importance in a section.
+
+<Canvas>
+  <Story name="Information" args={{ action: 'information' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+#### Neutral
+
+A neutral button is considered the simplest action button. It is meant to have a low visual emphasis and should be used to provide visual contrast to the other more important buttons on the page. The neutral button should never be the only button in the section.
+
+<Canvas>
+  <Story name="Neutral" args={{ action: 'neutral' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+#### Destructive
+
+A destructive button is considered a secondary action button. It is meant to have a strong visual emphasis and should be used where the action requires high attention because it can be destructive. There should always be only one visible destructive button per section.
+
+<Canvas>
+  <Story name="Destructive" args={{ action: 'destructive' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Appearances
+
+`Button` supports 3 distinct appearances, which enable you to give your buttons different visual importance on the page.
+
+#### Full
+
+<Canvas>
+  <Story name="Full" args={{ appearance: 'full' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+#### Outline
+
+<Canvas>
+  <Story name="Outline" args={{ appearance: 'outline' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+#### Ghost
+
+<Canvas>
+  <Story name="Ghost" args={{ appearance: 'ghost' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Icons
+
+Icons can be used in buttons to provide additional clarity. Icons should not be used for decoration. If you're using an icons as the only child of the Button, you must add an alternative text representation, by using the `aria-label` or `aria-labeledby` props.
+
+<Canvas>
+  <Story name="Full with icon" args={{ appearance: 'full' }}>
+    {TemplateWithIcon.bind({})}
+  </Story>
+  <Story name="OUtline with icon" args={{ appearance: 'outline' }}>
+    {TemplateWithIcon.bind({})}
+  </Story>
+  <Story name="Outline with icon" args={{ appearance: 'ghost' }}>
+    {TemplateWithIcon.bind({})}
+  </Story>
+</Canvas>
+
+### Size
+
+Buttons come in five different sizes: extra-small, small, regular, large and extra-large. The regular is the default and the most used option. Sizes should be used to create a hierarchy of importance within the page.
+
+<Canvas>
+  <Story name="Extra small" args={{ size: 'xs' }}>
+    {Template.bind({})}
+  </Story>
+  <Story name="Small" args={{ size: 'sm' }}>
+    {Template.bind({})}
+  </Story>
+  <Story name="Normal" args={{ size: 'base' }}>
+    {Template.bind({})}
+  </Story>
+  <Story name="Large" args={{ size: 'lg' }}>
+    {Template.bind({})}
+  </Story>
+  <Story name="Extra large" args={{ size: 'xl' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Behaviors
+
+#### Keyboard focus
+
+Buttons can be navigated using a keyboard. When the button has focus, its visual state changes to reflect that.
+
+<Canvas>
+  <Story name="Keyboard focus" args={{ autoFocus: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+#### Flexible width
+
+The Button will shrink and grow to accomodate its content.
+
+<Canvas>
+  <Story name="Flexible width" args={{ size: 'base' }}>
+    {TemplateWithLongText.bind({})}
+  </Story>
+</Canvas>
+
+#### Text overflow
+
+The Button will not grow beyond its container's width. If the text in the Button is longer, it will wrap on another line.
+
+<Canvas>
+  <Story name="Text overflow" args={{ size: 'base' }}>
+    {TemplateWithTextOverflow.bind({})}
+  </Story>
+</Canvas>
+
+## Events
+
+Buttons support user interactions via mouse, which you can handle via the `onClick` prop.
+
+<ExampleOnPress />
+
+## Props
+
+<ArgsTable of={Button} />
