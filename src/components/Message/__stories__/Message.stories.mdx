@@ -1,5 +1,7 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
 import Message from '..';
+import Template from './Template';
 
 <Meta title="Components/Status/Message" component={Message} />
 
@@ -8,19 +10,18 @@ import Message from '..';
 Messages are ideal for calling the user's attention on a certain part of the page. They use the various statuses available throughout the component library to convey information, depending on what the user **is about to do**.
 
 Install: `yarn add '@modal/message`
+
 Usage: `import Message from '@modal/message';`
 
-export const Template = (args) => (
-  <Message {...args}>
-    This is a custom message you can display to your users.
-  </Message>
-);
+## Visual options
 
-## Status
+### Status
 
 `Message` supports style props, which enable you to use theme variables for styling to ensure consistency with the other components.
 
-### Neutral
+#### Neutral
+
+Use a neutral `Message` when the message you're trying to convey is purely to let the user know something will happened without the need to draw their attention. The neutral message is for low emphasis messages.
 
 <Canvas>
   <Story name="Neutral" args={{ status: 'neutral' }}>
@@ -28,7 +29,9 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-### Confirmation
+#### Confirmation
+
+Use a confirmation `Message` when you're trying to let the user know something important will happen and they need to confirm it. A confirmation communicates strong emphasis and is reserved for messages that are essential to an experience.
 
 <Canvas>
   <Story name="Confirmation" args={{ status: 'confirmation' }}>
@@ -36,7 +39,9 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-### Information
+#### Information
+
+Use an information `Message` when you're trying to let the user know something informative will happen. The information message is for medium emphasis messages.
 
 <Canvas>
   <Story name="Information" args={{ status: 'information' }}>
@@ -44,7 +49,9 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-### Destructive
+#### Destructive
+
+Use a destructive `Message` when you're trying to let the user know something destructive and potentially dangerous will happen next. The destructive message is for emphasizing actions that will have negative consequences if taken.
 
 <Canvas>
   <Story name="Destructive" args={{ status: 'destructive' }}>
@@ -52,22 +59,30 @@ export const Template = (args) => (
   </Story>
 </Canvas>
 
-## Icons
+### Icons
 
 By default, the icon is shown. You can choose to hide it by passing `hideIcon={false}`.
 
-### With icon
+#### With icon
+
+Attach the icon for each message type.
 
 <Canvas>
-  <Story name="With icon">
+  <Story name="With icon" args={{ status: 'neutral' }}>
     {Template.bind({})}
   </Story>
 </Canvas>
 
-### Without icon
+#### Without icon
+
+Do not attach the icon for each message type.
 
 <Canvas>
-  <Story name="Without icon" args={{ hideIcon: true }}>
+  <Story name="Without icon" args={{ status: 'neutral', hideIcon: true }}>
     {Template.bind({})}
   </Story>
 </Canvas>
+
+## Props
+
+<ArgsTable of={Message} />

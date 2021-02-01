@@ -35,17 +35,11 @@ function renderIcon(status: Action): JSX.Element {
 
 // eslint-disable-next-line import/no-unused-modules
 export interface MessageProps {
-  /**
-   * Determine the associated icon as well as its visual style
-   */
+  /** Determine the associated icon as well as its visual style */
   status?: Action;
-  /**
-   * Whether the icon should be displayed or not.
-   */
+  /** Whether the icon should be displayed or not */
   hideIcon?: boolean;
-  /**
-   * The content to display as the message.
-   */
+  /** The content to display as the message */
   children: ReactNode;
 }
 
