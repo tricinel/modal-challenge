@@ -1,0 +1,74 @@
+:root {
+  --rem-base: 1rem;
+  --base-font-size: 88.88%;
+
+  /* Fonts */
+  --font-body: -apple-system,Arial,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Ubuntu,Cantarell,Georgia,sans-serif;
+  --font--heading: -apple-system,Arial,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Ubuntu,Cantarell,Georgia,sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-xl: '75em';
+  --breakpoint-lg: '64em';
+  --breakpoint-md: '48em';
+  --breakpoint-sm: '28.75em';
+
+  /* Font sizes */
+  --text-3xl: 1.88rem;
+  --text-2xl: 1.6rem;
+  --text-xl: 1.24rem;
+  --text-lg: 1.12rem;
+  --text-base: 1rem;
+  --text-sm: 0.88rem;
+  --text-xs: 0.72rem;
+
+  /* Border radius */
+  --border-radius-3xl: 1.88rem;
+  --border-radius-2xl: 1.64rem;
+  --border-radius-xl: 1.24rem;
+  --border-radius-lg: 1.16rem;
+  --border-radius-base: 0.8rem;
+  --border-radius-sm: 0.64rem;
+  --border-radius-xs: 0.24rem;
+
+  /* Spacing */
+  --space-3xl: 1.8rem;
+  --space-2xl: 1.24rem;
+  --space-xl: 1.16rem;
+  --space-lg: 1rem;
+  --space-base: 0.8rem;
+  --space-sm: 0.64rem;
+  --space-xs: 0.48rem;
+
+  /* Sizes */
+  --box-size-xl: 72em;
+  --box-size-lg: 64em;
+  --box-size-base: 40em;
+  --box-size-sm: 32em;
+  --box-size-xs: 24em;
+
+  /* Colors */
+  --color-destructive-100: hsl(9,76.92%,94.9%);
+  --color-destructive-200: hsl(7.29,79.04%,55.1%);
+  --color-destructive-300: hsl(7.25,78.84%,37.06%);
+  --color-destructive-400: hsl(7,78.95%,14.9%);
+  --color-neutral-100: hsl(180,15.38%,94.9%);
+  --color-neutral-200: hsl(180,17.39%,54.9%);
+  --color-neutral-300: hsl(180,17.39%,27.06%);
+  --color-neutral-400: hsl(180,16.88%,15.1%);
+  --color-information-100: hsl(247.5,30.77%,94.9%);
+  --color-information-200: hsl(244.23,31%,55.1%);
+  --color-information-300: hsl(244.23,30.74%,45.29%);
+  --color-information-400: hsl(245,31.58%,14.9%);
+  --color-confirmation-100: hsl(216,76.92%,94.9%);
+  --color-confirmation-200: hsl(215.54,80%,54.9%);
+  --color-confirmation-300: hsl(215.78,80.1%,39.41%);
+  --color-confirmation-400: hsl(216.39,79.22%,15.1%);
+  --color-white-100: hsl(0,0%,94.9%);
+  --color-white-200: hsl(0,0%,54.9%);
+  --color-white-300: hsl(0,0%,100%);
+  --color-white-400: hsl(0,0%,14.9%);
+  --color-black-100: hsl(0,0%,94.9%);
+  --color-black-200: hsl(0,0%,54.9%);
+  --color-black-300: hsl(0,0%,0%);
+  --color-black-400: hsl(0,0%,14.9%);
+}
