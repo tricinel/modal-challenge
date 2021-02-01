@@ -1,0 +1,73 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import Message from '..';
+
+<Meta title="Components/Status/Message" component={Message} />
+
+# Message
+
+Messages are ideal for calling the user's attention on a certain part of the page. They use the various statuses available throughout the component library to convey information, depending on what the user **is about to do**.
+
+Install: `yarn add '@modal/message`
+Usage: `import Message from '@modal/message';`
+
+export const Template = (args) => (
+  <Message {...args}>
+    This is a custom message you can display to your users.
+  </Message>
+);
+
+## Status
+
+`Message` supports style props, which enable you to use theme variables for styling to ensure consistency with the other components.
+
+### Neutral
+
+<Canvas>
+  <Story name="Neutral" args={{ status: 'neutral' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Confirmation
+
+<Canvas>
+  <Story name="Confirmation" args={{ status: 'confirmation' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Information
+
+<Canvas>
+  <Story name="Information" args={{ status: 'information' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Destructive
+
+<Canvas>
+  <Story name="Destructive" args={{ status: 'destructive' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Icons
+
+By default, the icon is shown. You can choose to hide it by passing `hideIcon={false}`.
+
+### With icon
+
+<Canvas>
+  <Story name="With icon">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Without icon
+
+<Canvas>
+  <Story name="Without icon" args={{ hideIcon: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
