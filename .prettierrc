@@ -8,5 +8,5 @@
   "trailingComma": "none",
   "bracketSpacing": true,
   "jsxBracketSameLine": false,
-  "jsxSingleQuote": true
+  "jsxSingleQuote": false
 }
