@@ -59,6 +59,7 @@
   "scripts": {
     "lint": "eslint src/**/*.{ts,tsx}",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit",
     "test": "jest",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
