@@ -8,6 +8,7 @@ import ModalContext from './ModalContext';
 
 const ModalHeaderWrapper = styled(Box.withComponent('header'))`
   align-items: center;
+  border-bottom: 1px solid ${colors['black-100']};
   box-sizing: border-box;
   display: flex;
   grid-area: header;
@@ -60,7 +61,12 @@ export default function ModalHeader({
         <ModalHeaderWrapper>
           <ModalTitle>{whichTitle(ctxTitle, title)}</ModalTitle>
           {!hideClose && (
-            <Button action="neutral" appearance="ghost" onClick={closeModal}>
+            <Button
+              action="neutral"
+              appearance="ghost"
+              onClick={closeModal}
+              aria-label="Close"
+            >
               <CloseIcon />
             </Button>
           )}

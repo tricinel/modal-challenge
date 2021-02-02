@@ -9,7 +9,6 @@ import { colors, space } from '../../tokens';
  */
 const ModalBody = styled.div`
   border-bottom: 1px solid ${colors['black-100']};
-  border-top: 1px solid ${colors['black-100']};
   box-sizing: border-box;
   grid-area: body;
   max-height: 80vh;
@@ -18,10 +17,6 @@ const ModalBody = styled.div`
 
   &:last-child {
     border-bottom: 0;
-  }
-
-  &:first-child {
-    border-top: 0;
   }
 `;
 
