@@ -1,0 +1,132 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
+import { TextField } from '..';
+import { TextFieldTemplate } from './Template';
+import { isRequired, isExactly } from '../../../core/validations';
+import { ExampleOnBlur, ExampleOnChange } from './Examples';
+
+<Meta title="Components/Form/TextField" component={TextField} />
+
+# TextField
+
+TextFields are text inputs that allow users to use their keyboard to enter text into forms.
+
+Install: `yarn add '@modal/textfield`
+
+Usage: `import Button from '@modal/textfield';`
+
+## Options
+
+### Label
+
+You must provide a visual label for the TextField using the `label` prop. If the TextField is required, the `isRequired` and `requiredIndicatorType` props can be used to show a required state. If it is not required, you can choose to show the text `(optional)` for the fields by using the props `requiredIndicatorType` and `alwaysShowRequiredIndicator`.
+
+<Canvas>
+  <Story name="Label" args={{ label: 'Enter your name' }}>
+    {TextFieldTemplate.bind({})}
+  </Story>
+  <Story
+    name="Required with icon"
+    args={{ label: 'Enter your name', isRequired: true }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+  <Story
+    name="Required with text"
+    args={{
+      label: 'Enter your name',
+      isRequired: true,
+      requiredIndicatorType: 'text'
+    }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+  <Story
+    name="Optional with text"
+    args={{
+      label: 'Enter your name',
+      alwaysShowRequiredIndicator: true,
+      requiredIndicatorType: 'text'
+    }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Value and onChange
+
+A TextField's value is empty by default. You can provide a value use the `value` prop. Be sure to also have the `onChange` handler attached to the TextField. Placeholder text can be used to describe what the expected value should be or to hint at formatting for the TextField. Placeholder text only appears when the TextField's value is empty, and should not be used as a substitute for labeling the component with a visible label. Additionally, a hint text can be added to make it clear for the user what is expected of them.
+
+<Canvas>
+  <Story
+    name="Placeholder"
+    args={{
+      label: 'Enter your name',
+      placeholder: 'Please tell us your name',
+      hint: 'Your name is very important to us'
+    }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### States
+
+A TextField can be disabled by using the `isDisabled` prop and made to be `readonly` using the `isReadonly` prop. Setting either of these props not only changes the behavior of the field, but also the visual styling. You can also autofocus on the TextField immediately after render by using the `autoFocus` prop.
+
+<Canvas>
+  <Story name="Disabled" args={{ label: 'Enter your name', isDisabled: true }}>
+    {TextFieldTemplate.bind({})}
+  </Story>
+  <Story
+    name="Readonly"
+    args={{ label: 'Enter your name', isReadonly: true, value: 'Bogdan' }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+  <Story
+    name="Autofocus"
+    args={{ label: 'Enter your name', autoFocus: true, value: 'Bogdan' }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Validation
+
+TextFields can display a validation state to communicate to the user whether the current value is valid or invalid. This requires that you implement your own validation functions and pass them to the TextField. Internally, the TextField will check that the value entere by the user passes each of the validation functions when the field is blurred (i.e. **after** the user has entered a value and moved away from the field). When a field is invalid, its visual state changes and a validation message is displayed underneath.
+
+<Canvas>
+  <Story
+    name="Single validation"
+    args={{
+      label: 'This is required',
+      isRequired: true,
+      hint: 'Click on it and then away without entering anything',
+      validations: [isRequired]
+    }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+  <Story
+    name="Multiple validations"
+    args={{
+      label: 'This is required and you must enter exactly the word "booyah"',
+      isRequired: true,
+      validations: [isRequired, isExactly('booyah')]
+    }}
+  >
+    {TextFieldTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Events
+
+TextFields support the `onBlur` and `onChange` events.
+
+<ExampleOnChange />
+<ExampleOnBlur />
+
+## Props
+
+<ArgsTable of={TextField} />

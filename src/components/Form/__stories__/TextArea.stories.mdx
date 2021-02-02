@@ -1,0 +1,147 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
+import { TextArea } from '..';
+import { TextAreaTemplate } from './Template';
+import { isEmpty, isExactly } from '../../../core/validations';
+import { ExampleOnBlur, ExampleOnChange } from './Examples';
+
+<Meta title="Components/Form/TextArea" component={TextArea} />
+
+# TextArea
+
+TextAreas are multiline text inputs, useful for cases where you expect users to have more text to enter than might fit into a TextField. TextAreas allow for all customisations as TextFields.
+
+Install: `yarn add '@modal/textarea`
+
+Usage: `import Button from '@modal/textarea';`
+
+## Options
+
+### Label
+
+You must provide a visual label for the TextArea using the `label` prop. If the TextArea is required, the `isRequired` and `requiredIndicatorType` props can be used to show a required state. If it is not required, you can choose to show the text `(optional)` for the fields by using the props `requiredIndicatorType` and `alwaysShowRequiredIndicator`.
+
+<Canvas>
+  <Story name="Label" args={{ label: 'Enter your message' }}>
+    {TextAreaTemplate.bind({})}
+  </Story>
+  <Story
+    name="Required with icon"
+    args={{ label: 'Enter your message', isRequired: true }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+  <Story
+    name="Required with text"
+    args={{
+      label: 'Enter your message',
+      isRequired: true,
+      requiredIndicatorType: 'text'
+    }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+  <Story
+    name="Optional with text"
+    args={{
+      label: 'Enter your message',
+      alwaysShowRequiredIndicator: true,
+      requiredIndicatorType: 'text'
+    }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Value and onChange
+
+A TextArea's value is empty by default. You can provide a value use the `value` prop. Be sure to also have the `onChange` handler attached to the TextArea. Placeholder text can be used to describe what the expected value should be or to hint at formatting for the TextArea. Placeholder text only appears when the TextArea's value is empty, and should not be used as a substitute for labeling the component with a visible label. Additionally, a hint text can be added to make it clear for the user what is expected of them.
+
+<Canvas>
+  <Story
+    name="Placeholder"
+    args={{
+      label: 'Enter your message',
+      placeholder: 'Please tell us what is on your mind',
+      hint: 'Your message is very important to us'
+    }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### States
+
+A TextArea can be disabled by using the `isDisabled` prop and made to be `readonly` using the `isReadonly` prop. Setting either of these props not only changes the behavior of the field, but also the visual styling. You can also autofocus on the TextArea immediately after render by using the `autoFocus` prop.
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{ label: 'Enter your message', isDisabled: true }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+  <Story
+    name="Readonly"
+    args={{
+      label: 'Enter your message',
+      isReadonly: true,
+      value:
+        "Open your eyes / Look up to the skies and see / I'm just a poor boy, I need no sympathy / Because I'm easy come, easy go / Little high, little low / Any way the wind blows / Doesn't really matter to me, to me"
+    }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+  <Story
+    name="Autofocus"
+    args={{ label: 'Enter your message', autoFocus: true, value: 'Carry on, carry on as if nothing really matters' }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+</Canvas>
+
+### Size
+
+A TextArea can be resized using the `rows` property. It will determine how many rows the box should have. By default, all TextAreas have 3 rows.
+
+<Canvas>
+  <Story name="Rows" args={{ label: 'Enter your message', rows: 10 }}>
+    {TextAreaTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Validation
+
+TextAreas can display a validation state to communicate to the user whether the current value is valid or invalid. This requires that you implement your own validation functions and pass them to the TextArea. Internally, the TextArea will check that the value entere by the user passes each of the validation functions when the field is blurred (i.e. **after** the user has entered a value and moved away from the field). When a field is invalid, its visual state changes and a validation message is displayed underneath.
+
+<Canvas>
+  <Story
+    name="Single validation"
+    args={{
+      label: 'This is required',
+      isRequired: true,
+      hint: 'Click on it and then away without entering anything',
+      validations: [isEmpty]
+    }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+  <Story
+    name="Multiple validations"
+    args={{
+      label: 'This is required and you must enter exactly the word "booyah"',
+      isRequired: true,
+      validations: [isEmpty, isExactly('booyah')]
+    }}
+  >
+    {TextAreaTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## Events
+
+TextAreas support the `onBlur` and `onChange` events, exactly the same as TextFields.
+
+## Props
+
+<ArgsTable of={TextArea} />

@@ -4,7 +4,7 @@ export type Validator =
   | ((comparator: unknown, value?: unknown) => boolean)
   | ((comparator: unknown) => (value: unknown) => boolean);
 
-export function isRequired(value: string | number | boolean): boolean {
+export function isEmpty(value: string | number | boolean): boolean {
   if (typeof value === 'undefined') {
     return false;
   }
