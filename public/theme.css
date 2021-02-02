@@ -7,10 +7,11 @@
   --font--heading: -apple-system,Arial,BlinkMacSystemFont,Roboto Slab,Droid Serif,Segoe UI,Ubuntu,Cantarell,Georgia,sans-serif;
 
   /* Breakpoints */
-  --breakpoint-xl: '75em';
-  --breakpoint-lg: '64em';
-  --breakpoint-md: '48em';
-  --breakpoint-sm: '28.75em';
+  /* These don't work because we cannot interpolate CSS variables inside media queries :( */
+  --breakpoint-xl: 75em;
+  --breakpoint-lg: 64em;
+  --breakpoint-md: 48em;
+  --breakpoint-sm: 28.75em;
 
   /* Font sizes */
   --text-3xl: 1.88rem;

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 const Box = styled('div')`
   appearance: none;
   box-sizing: border-box;
-  line-height: 1;
+  line-height: 1.32;
   outline: 0;
 
   &::after,

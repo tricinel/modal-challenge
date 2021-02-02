@@ -1,21 +1,20 @@
 // eslint-disable-next-line import/no-unused-modules
 export interface Breakpoints {
-  xl: string;
-  lg: string;
-  md: string;
-  sm: string;
+  xl: number;
+  lg: number;
+  md: number;
+  sm: number;
 }
 
 /*
  * The theme's breakpoints follow the general pattern of the box size names as the keys and the device widths as the values.
- * We're specifically not defining them as min-width or max-width, because we'll be able to interpolate them inside our components.
- * As with everything in the tokens, these are easily overwritable using CSS variables.
+ * Interpolating CSS variables inside of media queries doesn't work just yet. :(
  */
 const breakpoints: Breakpoints = {
-  xl: 'var(--breakpoint-xl, 75em)',
-  lg: 'var(--breakpoint-lg, 64em)',
-  md: 'var(--breakpoint-md, 48em)',
-  sm: 'var(--breakpoint-sm, 28.75em)'
+  xl: 75,
+  lg: 64,
+  md: 48,
+  sm: 28.75
 };
 
 export default breakpoints;
