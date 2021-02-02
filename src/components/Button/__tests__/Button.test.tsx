@@ -62,7 +62,10 @@ describe('Button events', () => {
   test('react to a keypress event on a Button component', () => {
     const onKeyUp = jest.fn();
     render(<Button onKeyUp={onKeyUp}>Click me</Button>);
-    fireEvent.keyUp(screen.getByRole('button'));
+    fireEvent.keyUp(screen.getByRole('button'), {
+      key: 'Enter',
+      code: 'Enter'
+    });
     expect(onKeyUp).toHaveBeenCalledTimes(1);
   });
 });
