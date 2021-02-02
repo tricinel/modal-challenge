@@ -32,3 +32,13 @@ Usage: `import { CloseIcon } from '@modal/icons';`
     <WarningIcon width="6em" />
   </Story>
 </Canvas>
+
+### Accessibility
+
+By default, icons are considered decorative, and as such they are hidden from the accessibility tree using `aria-hidden`. Therefore, if you're using an icon as standalone where its meaning is lost to assistive technologies, such as the sole child of a button, an `aria-label` or `aria-labelledby` attribute must be passed to the icon itself. This will remove the `aria-hidden` attribute from the icon.
+
+<Canvas>
+  <Story name="Accessible icon">
+    <CheckIcon width="6em" aria-label="Check me out" />
+  </Story>
+</Canvas>
