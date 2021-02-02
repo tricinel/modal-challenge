@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
+import ModalHeader from '../ModalHeader';
+import TemplateModalHeader from './Template';
+
+<Meta title="Components/Modal/Header" component={ModalHeader} />
+
+# ModalHeader
+
+The `<ModalHeader />` component represents the header within a Modal. It is meant to encompass a title and optionally a Close button.
+
+> The title will likely come from the Modal via a ModalContext. However, if you want the Header to have a different title than the Modal (which uses its title to set the aria-label), then this is where you do it.
+
+<Canvas>
+  <Story name="Default" args={{ title: 'Edit datastream' }}>
+    {TemplateModalHeader.bind({})}
+  </Story>
+</Canvas>
+
+## Without the close icon
+
+You can optionally omit the Close icon in the header using the `hideClose` prop.
+
+<Canvas>
+  <Story
+    name="Without close"
+    args={{ title: 'Edit datastream', hideClose: true }}
+  >
+    {TemplateModalHeader.bind({})}
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={ModalHeader} />

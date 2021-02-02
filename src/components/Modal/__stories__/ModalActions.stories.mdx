@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import ModalActions from '../ModalActions';
+import Button from '../../Button';
+
+<Meta title="Components/Modal/Actions" component={ModalActions} />
+
+# ModalActions
+
+The `<ModalActions />` component represents a section of the footer within a Modal. It is meant to encompass primary action buttons or links that are meant to have a high visual emphasis. The container is placed to the right of the Modal window, in the footer, in tablet and desktop devices, and to the left on smaller devices. The ModalActions can be the only actions container in a Modal.represents the header within a Modal. It is meant to encompass a title and optionally a Close button.
+
+<Canvas>
+  <Story name="Default">
+    <ModalActions>
+      <Button action="confirmation">Submit</Button>
+      <Button appearance="outline" action="confirmation">
+        Cancel
+      </Button>
+    </ModalActions>
+  </Story>
+</Canvas>

@@ -1,0 +1,51 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import ModalBody from '../ModalBody';
+import Message from '../../Message';
+import { TextField, TextArea } from '../../Form';
+
+<Meta title="Components/Modal/Body" component={ModalBody} />
+
+# ModalBody
+
+The `<ModalBody />` component represents the main section a Modal. It is meant to encompass the content of the modal. It has a maximum height beyond which the content will scroll. The container is in between the ModalHeader and the ModalFooter.
+
+<Canvas>
+  <Story name="Default">
+    <ModalBody>
+      <p>This is my content here</p>
+    </ModalBody>
+  </Story>
+</Canvas>
+
+## Content
+
+The `<ModalBody />` component is quite versatile and allows you to enter any content inside.
+
+### Messages
+
+<Canvas>
+  <Story name="Message">
+    <ModalBody>
+      <Message status="information">
+        This will overwrite all visualisations on connected dashboard widgets.
+        This action cannot be undone.
+      </Message>
+    </ModalBody>
+  </Story>
+</Canvas>
+
+### Forms
+
+<Canvas>
+  <Story name="Form">
+    <ModalBody>
+      <TextField label="Email" value="" />
+      <TextField label="Subject" value="" />
+      <TextArea
+        label="Subject"
+        value=""
+        placeholder="Enter your message here"
+      />
+    </ModalBody>
+  </Story>
+</Canvas>

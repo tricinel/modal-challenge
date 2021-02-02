@@ -1,0 +1,18 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import ModalLinks from '../ModalLinks';
+import Button from '../../Button';
+
+<Meta title="Components/Modal/Links" component={ModalLinks} />
+
+# ModalLinks
+
+The `<ModalLinks />` component represents a section of the footer within a Modal. It is meant to encompass secondary action buttons or links that are meant to have a low visual emphasis. The container is placed to the left of the Modal window, in the footer. The ModalLinks should not be the only actions in a Modal.
+
+<Canvas>
+  <Story name="Default">
+    <ModalLinks>
+      <Button size="sm" appearance="ghost">Copy link</Button>
+      <Button size="sm" appearance="ghost">Get embed code</Button>
+    </ModalLinks>
+  </Story>
+</Canvas>

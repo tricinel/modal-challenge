@@ -1,0 +1,145 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import Modal from '../Modal';
+import ModalHeader from '../ModalHeader';
+import ModalActions from '../ModalActions';
+import ModalLinks from '../ModalLinks';
+import ModalBody from '../ModalBody';
+import Button from '../../Button';
+import Message from '../../Message';
+import Image from '../../Image';
+import { LinkIcon, EmbedIcon } from '../../../icons';
+import { TextArea, TextField } from '../../Form';
+
+<Meta
+  title="Components/Modal/Examples"
+  component={Modal}
+  parameters={{ viewMode: 'canvas', docs: { page: null } }}
+/>
+
+# ModalBody
+
+The `<Modal />` blabla
+
+## Focus management
+
+Focus is automatically trapped inside the modal and the focus goes to the first element in its tab order.
+
+> The next version should allow the developers to customise where the modal should first focus.
+
+<Canvas>
+  <Story name="Logo">
+    <Modal title="Edit datastream?">
+      <ModalHeader />
+      <ModalBody>
+        <div style={{ textAlign: 'center', margin: '2em auto', maxWidth: '80px' }}>
+          <Image
+            src="https://www.upvision.it/wp-content/uploads/2018/03/481px-Google_Ads_logo.svg-e1543860010400.png"
+            layout="fill"
+            alt="Google Ads logo"
+          />
+        </div>
+        <TextField label="Datastream title" value="Google Ads report" />
+        <TextArea
+          label="Description"
+          value=""
+          placeholder="Enter your message here"
+        />
+      </ModalBody>
+      <ModalLinks>
+        <Button size="sm" appearance="ghost">
+          <LinkIcon width="2em" />
+          Copy link
+        </Button>
+        <Button size="sm" appearance="ghost">
+          <EmbedIcon width="2em" />
+          Get embed code
+        </Button>
+      </ModalLinks>
+      <ModalActions>
+        <Button action="confirmation">Apply</Button>
+        <Button appearance="outline" action="confirmation">
+          Cancel
+        </Button>
+      </ModalActions>
+    </Modal>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Information message">
+    <Modal title="Alert">
+      <ModalHeader />
+      <ModalBody>
+        <Message status="information">
+          This is an example of an alert message that is so important that
+          deserverd a modal dialog.
+        </Message>
+      </ModalBody>
+      <ModalActions>
+        <Button action="confirmation">Got it</Button>
+      </ModalActions>
+    </Modal>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Confirmation message">
+    <Modal title="Apply changes?">
+      <ModalHeader />
+      <ModalBody>
+        <Message status="information">
+          This will overwrite all visualisations on connected dashboard widgets.
+          This action cannot be undone.
+        </Message>
+      </ModalBody>
+      <ModalActions>
+        <Button action="confirmation">Apply</Button>
+        <Button appearance="outline" action="confirmation">
+          Cancel
+        </Button>
+      </ModalActions>
+    </Modal>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Destructive message">
+    <Modal title="Delete user?">
+      <ModalHeader />
+      <ModalBody>
+        <Message status="destructive">
+          This will permanently delte John Doe. This action cannot be undone.
+        </Message>
+      </ModalBody>
+      <ModalActions>
+        <Button action="destructive">Delete user</Button>
+        <Button appearance="outline" action="confirmation">
+          Cancel
+        </Button>
+      </ModalActions>
+    </Modal>
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Form">
+    <Modal size="lg" title="Contact support">
+      <ModalHeader />
+      <ModalBody>
+        <TextField label="Email" value="" />
+        <TextField label="Subject" value="" />
+        <TextArea
+          label="Subject"
+          value=""
+          placeholder="Enter your message here"
+        />
+      </ModalBody>
+      <ModalActions>
+        <Button action="confirmation">Submit</Button>
+        <Button appearance="outline" action="confirmation">
+          Cancel
+        </Button>
+      </ModalActions>
+    </Modal>
+  </Story>
+</Canvas>
