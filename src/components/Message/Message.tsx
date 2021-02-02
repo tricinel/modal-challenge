@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
+import Box from '../Box';
 import { colors, space, fontSizes, breakpoints, fonts } from '../../tokens';
 
-const MessageBox = styled('div')`
+const MessageBox = styled(Box.withComponent('div'))`
   align-items: baseline;
-  box-sizing: border-box;
   color: ${colors['neutral-300']};
   display: flex;
   gap: ${space.xs};
