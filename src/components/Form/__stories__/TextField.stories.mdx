@@ -2,7 +2,7 @@ import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 import { ArgsTable } from '@storybook/addon-docs/blocks';
 import { TextField } from '..';
 import { TextFieldTemplate } from './Template';
-import { isRequired, isExactly } from '../../../core/validations';
+import { isEmpty, isExactly } from '../../../core/validations';
 import { ExampleOnBlur, ExampleOnChange } from './Examples';
 
 <Meta title="Components/Form/TextField" component={TextField} />
@@ -103,7 +103,7 @@ TextFields can display a validation state to communicate to the user whether the
       label: 'This is required',
       isRequired: true,
       hint: 'Click on it and then away without entering anything',
-      validations: [isRequired]
+      validations: [isEmpty]
     }}
   >
     {TextFieldTemplate.bind({})}
@@ -113,7 +113,7 @@ TextFields can display a validation state to communicate to the user whether the
     args={{
       label: 'This is required and you must enter exactly the word "booyah"',
       isRequired: true,
-      validations: [isRequired, isExactly('booyah')]
+      validations: [isEmpty, isExactly('booyah')]
     }}
   >
     {TextFieldTemplate.bind({})}
