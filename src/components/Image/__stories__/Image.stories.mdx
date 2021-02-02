@@ -1,0 +1,116 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
+import Image from '..';
+
+<Meta title="Components/Image" component={Image} />
+
+# Image
+
+Image is used to insert and display an image within a section.
+
+Install: `yarn add '@modal/image`
+
+Usage: `import Image from '@modal/image';`
+
+## Src and srcSet
+
+The `<Image />` component requires the `src` for the image in the form of either a local path or an external URL.
+
+<Canvas>
+  <Story name="Image with src">
+    <Image
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+At the same time, you can pass in a `srcSet` to better control which image gets displayed at which device size and orientation. For details on `srcSet`, see [here](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset).
+
+> In order to see the different images, please resize your browser. As you go lower than a tablet, you should see a completely different photo.
+
+<Canvas>
+  <Story name="Image with srcSet">
+    <Image
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b"
+      srcSet="https://images.unsplash.com/photo-1444212477490-ca407925329e?w=800&q=80 640w, https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1200&q=80 1024w"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+## Layouts
+
+
+### Fixed
+
+The image dimensions will not change as the viewport changes.
+
+<Canvas>
+  <Story name="Fixed Image">
+    <Image
+      layout="fixed"
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+### Responsive
+
+The image will respond to viewport changes and will scale up and down as the that changes.
+
+<Canvas>
+  <Story name="Responsive Image">
+    <Image
+      layout="responsive"
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+### Fill
+
+The image will scale up and down as the viewport changes and maintain the aspect ratio, filling the entire content box. If it does not match the aspect ratio of its box, then the Image will be clipped to fit.
+
+<Canvas>
+  <Story name="Fill Image">
+    <Image
+      layout="fill"
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+### Scale-down
+
+The image will scale the dimensions down for smaller viewports but maintain the original dimensions for larger viewports.
+
+<Canvas>
+  <Story name="Scale-down Image">
+    <Image
+      layout="scale-down"
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+### Accessibility
+
+Images must have an `alt` attribute. If the image is considered decorative and should not be announced by screen readers, then set the prop to an emtpy string like `alt=""`.
+
+<Canvas>
+  <Story name="Accessible image">
+    <Image
+      src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80"
+      alt="two dogs running next to each other in the sun"
+    />
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={Image} />
