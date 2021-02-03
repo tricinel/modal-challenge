@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "license": "MIT",
-  "description": "",
-  "keywords": [],
+  "description": "We didn't have enough modals, so I built one",
+  "keywords": ["modals", "design tokens", "design system", "other", "buzz", "words"],
   "main": "src/index.tsx",
   "dependencies": {
     "@emotion/react": "^11.1.4",
