@@ -1,0 +1,349 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="RFCs/Modal" />
+
+# RFC: Modal Component
+
+- Start Date: 2021-02-03
+
+# Summary
+
+In this RFC, I propose introducing a new `<Modal />` component to our design system.
+
+* Modals enhance usability by focusing your user's attention on a specific piece of information they need to be aware of
+* Modals enhance usability by drawing your user's attention to a critical task they need to accomplish before they can continue with their workflow
+* Modals provide a seamless interface you can use to interrupt the user with a mandatory confirmation or action
+
+# Basic example
+
+The following is a basic example of how to use a `<Modal />` to ask the user for confirmation before removing another person from their organisation.
+
+```jsx
+import React from 'react';
+import { Modal, ModalHeader, ModalBody, ModalActions } from '@modal/modal';
+import deleteTheUser from 'somewhere';
+
+function DeleteUserModal() {
+  return (
+    <Modal title="Delete user?">
+      <ModalHeader />
+      <ModalBody>
+        <p>This will permanently delete the user. Are you sure you wish to continue?</p>
+      </ModalBody>
+      <ModalActions>
+        <button onClick={deleteTheUser}>Yes, delete</button>
+      </ModalActions>
+    </Modal>
+  );
+}
+```
+
+# Motivation
+
+A modal dialog is a separate window that appears on top of the main content window and prevents the user from interacting with the body of the page. While there are plenty of warnings of why they should not be used, there are certainly circumstances where they make sense and they can even enhance the experience of our users.
+
+Looking at our existing products, we've noticed some tasks the users have problems with.
+
+1. Users perform destructive, irreversible actions, with critical (and sometimes unintended) consequences. For example, deleting data is a destructive action and we should require a confirmation from the user before performing it.
+2. Users have their workflow disrupted when they are asked to enter some critical information before being allowed to continue with their work. For example, their session has expired and they need to log in again if they want to continue working.
+3. Users waste time entering information on the page. For example, a long form can be significantly shortened if the user tells us to use existing information from their account.
+
+In all these situations, the user is disrupted, loses attention, loses patience and is ultimately stressed with their experience with our products.
+
+# Detailed design
+
+The new component will try to hide its internals as best as possible and offer the most straightforward experience for the developers using it. At the same time, it follows best practices for accessibility, making that built in by design.
+
+## Main component
+
+The `<Modal />` component has minimal requirements to be configured. A few stand out in terms of accessibility.
+
+* The `title` property will both provide a visible title in the `<ModalHeader />` (unless overwritten by it, see [here](#modalheader)) and also label the modal for assistive technologies using the `aria-label` attribute.
+* The `priority` property will determine which role the `<Modal />` should have. A `polite` setting will cause it to have `role="dialog"`, while a setting of `assertive` will turn it into `role="alertdialog"`. The difference between the two is subtle, but worth noting. An `alertdialog` should be used to notify the user of urgent information they need to act on (most destructive actions will use this). A `dialog` on the other hand can be used to let them know of something they've done or that is about to happen (most information actions will use this). By default, `<Modal />` has the `polite` setting and, as such, the `dialog` role.
+* The `closeOnEscape` property will listen for the user pressing the `Escape` key and dismiss the modal if it's enabled **and** if the user is not currently typing in a field. See [Keyboard events](#keyboard).
+* The `closeOnClickOutside` property will listen for the user clicking outside the modal and dismiss it if it's enabled. See [Mouse events](#mouse).
+
+**It's important to note that the `<Modal />` must have at least one container with at least one tabbable node in it at all times (see [Focus management](#focus-management).**
+
+As such, the simplest `<Modal />` is this:
+
+```jsx
+<Modal title="Are you sure?">
+  <a href="#">Yes</a>
+</Modal>
+```
+
+The interface for the component is:
+
+```ts
+interface ModalProps {
+  /**
+   * The title that shows up in the modal's header, unless overwritten.
+   * This also sets the aria-label for the modal.
+   */
+  title: string;
+  /** Whether the modal is visible on the page or not  */
+  open?: boolean;
+  /** Determine the size of the modal window */
+  size?: BoxSize;
+  /** Determines what type of dialog this is based: dialog or alertdialog */
+  priority?: Priority;
+  /** Whether the modal should be closed when the user presses Escape */
+  closeOnEscape?: boolean;
+  /** Whether the modal should be closed when the user clicks outside of it */
+  closeOnClickOutside?: boolean;
+  /**
+   * The content to display as the inside the modal.
+   * This will usually include a ModalHeader, ModalBody, ModalLinks and ModalActions.
+   */
+  children: ReactNode;
+}
+```
+
+## Subcomponents
+
+The content of a `<Modal />` is controlled completely by passing children to it. While you can generally create any sort of content you want for your modals, to make things much easier, `<Modal />` comes out of the box with a few sub components that will make sure everything is visually styled and placed in the correct place inside the modal.
+
+To afford better control over its contents, I'm proposing the following subcomponents to be used as `children` inside the `<Modal />`. These will provide a more visually appealing look to the modal and all its contents, as well as allow the maximum options for extensibility, making them suitable for most if not all use cases.
+
+### ModalHeader
+
+The `<ModalHeader />` component represents the header within a `<Modal />`. It is meant to encompass a title and optionally a close button. The title will likely come from the `<Modal />` via a `<ModalContext />` (see [here](#internal-state)).
+
+Adding a `<ModalHeader />` to the above example becomes straightforward:
+
+```jsx
+<Modal title="Are you sure?">
+  <ModalHeader title="Are you really sure?" />
+  <a href="#">Yes</a>
+</Modal>
+```
+
+The interface for the component is:
+
+```ts
+interface ModalHeaderProps {
+  /** The title content that displays in the header */
+  title?: string;
+  /** Whether to hide the close button in the header */
+  hideClose?: boolean;
+}
+```
+
+### ModalBody
+
+The `<ModalBody />` component represents the main section a `<Modal />`. It is meant to encompass the content of the modal. It has a maximum height beyond which the content will scroll. The container is in between the `<ModalHeader />` and the `<ModalFooter />`.
+
+Continuing the previous example, we have:
+
+```jsx
+<Modal title="Are you sure?">
+  <ModalHeader title="Are you really sure?" />
+  <ModalBody>
+    <p>Deleting this user will delete all of their data.</p>
+  </ModalBody>
+  <a href="#">Yes</a>
+</Modal>
+```
+
+### ModalActions
+
+The `<ModalActions />` component represents a section of the footer within a `<Modal />`. It is meant to encompass primary action buttons or links that are meant to have a high visual emphasis. The container is placed to the right of the window, in the footer, in tablet and desktop devices, and to the left on smaller devices.
+
+We can now move our confirmation button inside this component:
+
+```jsx
+<Modal title="Are you sure?">
+  <ModalHeader title="Are you really sure?" />
+  <ModalBody>
+    <p>Deleting this user will delete all of their data.</p>
+  </ModalBody>
+  <ModalActions>
+    <a href="#">Yes</a>
+  </ModalActions>
+</Modal>
+```
+
+### ModalLinks
+
+The `<ModalLinks />` component represents a section of the footer within a `<Modal />`. It is meant to encompass secondary action buttons or links that are meant to have a low visual emphasis. The container is placed to the left of the Modal window, in the footer. The ModalLinks should not be the only actions in a `<Modal />`.
+
+We can add a link to an information page to help the user make up their mind:
+
+```jsx
+<Modal title="Are you sure?">
+  <ModalHeader title="Are you really sure?" />
+  <ModalBody>
+    <p>Deleting this user will delete all of their data.</p>
+  </ModalBody>
+  <ModalActions>
+    <a href="#">Yes</a>
+  </ModalActions>
+  <ModalLinks>
+    <a href="#">Help me decide</a>
+  </ModalLinks>
+</Modal>
+```
+
+## Internal state
+
+The `<Modal />` handles its own internal state through a `ModalContext`. This will allow it to handle its own open/closed state, pass certain props to sub components that needed and handle focus.
+
+The context object looks like this:
+
+```ts
+interface ModalContextProps {
+  /** The title for the ModalHeader and the Modal's aria-label */
+  title?: string;
+  /** Whether the modal is open or closed */
+  open: boolean;
+  /** The handler that closes the modal */
+  closeModal: () => void;
+}
+```
+
+## Events
+
+From an accessibility stand point, we need to make sure the component meets best practices. This means we need to handle both keyboard and mouse events.
+
+### Keyboard
+
+* `Escape` closes the modal. The exception to this rule is if the user is typing in a form, pressing `Esc` will not close the modal.
+* `Tab` moves the focus inside the modal. See more on [focus management](#focus-management).
+
+This event can be disabled through the `closeOnEscape` prop.
+
+```jsx
+<Modal title="Are you sure?"  closeOnEscape={false}>
+  <a href="#">Yes</a>
+</Modal>
+```
+
+### Mouse
+
+* Clicking on the outside of the modal should dismiss the modal.
+
+This event can be disabled through the `closeOnClickOutside` prop.
+
+```jsx
+<Modal title="Are you sure?"  closeOnClickOutside={false}>
+  <a href="#">Yes</a>
+</Modal>
+```
+
+## Focus management
+
+The `<Modal />` handles focus gracefully. It disallows focus to reach outside the modal content, by trapping it inside the modal. And the focus goes to the first element in its tab order.
+
+> It's important to note that the `<Modal />` must have at least one container with at least one tabbable node in it at all times.
+
+# Drawbacks
+
+There are a few disadvantages to note when it comes to using modal dialogs.
+
+## From the point of view of the user
+
+* They force the user to stop what they're doing and pay attention to a new thing that appeared on the screen. This can in turn infuriate users if used too often or as the main way to navigate the application.
+* Since modals require immediate attention, once the user has dealt with the critical thing in front of them, they might have forgotten where they were and what they were doing before the modal disturbed their train of thoughts.
+* Modals block the content in the background, therefore potentially covering important content that might be relevant to the user making the decision the modal forces them to make on the spot.
+
+## From the point of view of the developer
+
+* Introducing a new component means more to learn and can also lead to confusion as to when to use a modal dialog and when to choose the other means of presenting information.
+* Knowing which type of modal is appropriate for which action can cause developers to abandon using the modals altogether.
+* The constraints of the modal may not be intuitive for all developers, especially when it comes to accessibility considerations like managing focus and keyboard accessibility.
+* The complicated nature of the modal, resulting in a complicated markup structure, can cause confusion as to how the modal and its subcomponents needs to be used to get the most of it.
+* Current web assets using different approaches need to be migrated to using modals. In this case, the developers responsible will require both education in terms of how to use the modal and when to use it. This can cause initial delays in developing new features as it will take time for the codebase to incorporate the new component.
+
+# Alternatives
+
+Given that our web assets have survived this long without modals, it's not impossible to think that we can continue as such. However, certain situations can clearly benefit from modals as they solve some of the problems our users are facing in a much cleaner way.
+
+* We maintain the status quo, meaning we keep using our existing components, with little to no changes.
+* Alternative designs that have sprung up on an ad-hoc basis:
+  * Wizards that walk the user through a workflow, even if the workflow has just one step
+  * New page for every interaction
+  * Alert boxes that show up on the page
+
+I believe the alternative designs don't solve the problems we're facing as cleanly as a modal could.
+
+* Wizards with only one step cause a complete page refresh causing the user to lose their place in the flow
+* Having a new page for every interaction makes maintaining state between pages difficult
+* Alert boxes cause unnecessary layout shifts as the content moves up and down (which can be by quite a lot for alert boxes with lots of content) as the user interacts with the alert.
+
+# Adoption strategy
+
+The new component doesn't cause any breaking change to existing patterns and they can be used safely along side them. Since it's rather a replacement for them, a gradual adoption strategy is best suited.
+
+> A complete removal of existing strategies is not required
+
+I'm quite aware that our developers are hard at work shipping new features to our products and making sure everything functions at 100%. They therefore don't have enough time to focus on implementing new components in their products when the existing components do the job fairly well.
+
+What's most important is that **Modals work along side existing code so adoption is gradual**.
+
+**The crucial factor is co-ordinating with the other developers** to make sure everyone understands the trade-offs they are making when not using modals and how to best approach replacing their existing strategies with the new component.
+
+A specific plan of action involves:
+
+1. Pick one web asset that is already using an alternative to modals.
+2. Co-ordinate with the developers responsible to block the required amount of time in their roadmap and schedule.
+3. Run initial workshop on the benefits and drawbacks of modals vs. existing strategies.
+4. Implementation phase, where we work together with the developers to replace their alternatives with the modals, on a case by case basis.
+5. Once this pilot is complete, and if confidence is high, ask for volunteers from the developers to become an advocate and repeat the process with another team.
+6. We can now run two pilots at the same time. And it grows exponentially, depending on how many such pilots we need to run.
+
+# How we teach this
+
+The first steps are the easiest. We need to update the design system documentation to include the new component, provide ample examples on when to use modals, how to use them, tips for best experiences, what not to do and traps to watch out for.
+
+The next steps have to do with **incremental adoption** and depend on developer availability and willingness.
+
+Specifically, we need to work with developers both on one-on-ones and as a group to make sure the new component is well understood and at the same time that the developers have an easy way to experiment with modals.
+
+## Tools required
+
+We will need a playground so that everyone can easily experiment with modals. For instant feedback and an online experience, [Storybook](https://storybook.js.org/) is invaluable in this regard.
+
+## Group sessions
+
+We can afford to run multiple group sessions, as required, with open participation, everyone invited. It's not just the developers that could (or need to) participate here, but rather everyone that is customer facing. These sessions are meant to be a general introduction to the new component and what purposes it serves, together with an exploration of the current practices and where they fall short.
+
+The group sessions are not meant to be intensive deep code exploration hours long journeys into all the minute details of the component, but rather a high level overview.
+
+The sessions can be recorded so that they can be re-watched at everyone's convenience.
+
+The end result of these sessions is two-fold. Everyone should walk away with at least a basic understanding on how modals work and why to use them. Secondly, the notes from the sessions will serve as a how-to guide for everyone to refer back to.
+
+## One-on-ones
+
+The one-on-ones need to be more involved and will provide a deeper understanding of the internals of the modal. They are recommended for developers that will be working with the component. While these are not meant as an explanation on why something is done they way it is done, we do expect these questions and hope to learn a lot from them, alongside our developers.
+
+During the sessions, we want to quickly skip over the simple use cases and look at the more complex situations where existing strategies feel especially cumbersome.
+
+We expect to run a few such one-one-ones before adoption picks up.
+
+These sessions are more involved and more time-consuming, and, as such, the outcomes are more critical than in the group sessions. At the end, developers will walk away with a deep understanding of the new component and be able to incorporate it in their products for most use-cases. Secondly, the notes coming out of these sessions will serve as an implementation guide for everyone. And thirdly, we hope to turn at least some of the developers into advocates that can teach others how the new component works.
+
+Lest we forget, the most important outcome of all sessions, group or one-on-ones, is the feedback we receive that will help us to continually improve the new component.
+
+# Unresolved questions
+
+Some questions remain unresolved, or partially considered.
+
+**Naming is hard**
+
+I'm not sure if Modal is the best name for the component because of the implications that it has. Perhaps **AlertDialog** will be better. Ditto for the sub-components: `<ModalActions />`, `<ModalLinks />`, `<ModalHeader />` and `<ModalBody />`.
+
+**Overcomplicated**
+
+For simple straightforward situations, the proposed solution is too complex, because it forces a specific structure for the `children` and the developer needs to be aware of where everything goes. For example, primary actions go in `<ModalActions />` and secondary actions go in `<ModalLinks />`.
+
+**Modal vs non-modal dialogs**
+
+There are situations where a task is not critical and where a non-modal dialog might work better for the user. These are less offensive because they allow users to continue their activity if they so choose.
+
+In this case, would it be better to separate the two?
+
+**Focus management**
+
+While I've partially considered this, I haven't implemented a way for the consumer of the component to determine which element inside the modal should receive focus.
