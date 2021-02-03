@@ -1,24 +1,50 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
 import Modal from '../Modal';
-import ModalHeader from '../ModalHeader';
-import ModalActions from '../ModalActions';
-import ModalLinks from '../ModalLinks';
-import ModalBody from '../ModalBody';
-import Button from '../../Button';
-import Message from '../../Message';
-import Image from '../../Image';
-import { LinkIcon, EmbedIcon } from '../../../icons';
-import { TextArea, TextField } from '../../Form';
 
 <Meta
-  title="Components/Modal/Examples"
+  title="Components/Modal/Docs"
   component={Modal}
-  parameters={{ viewMode: 'canvas', docs: { page: null } }}
 />
 
-# ModalBody
+# Modal
 
-The `<Modal />` blabla
+The `<Modal />` represents a separate window with either contextual information or specific tasks the user needs to follow. They appear over the user interface. They are meant to enhance usability by focusing attention on a specific message that requires a user action to continue.
+
+> Modals should be used sparingly because they disrupt the flow of what the user is doing when they are not in control of opening the modal.
+
+## Required properties
+
+The `<Modal />` component has minimal requirements to be configured. A few stand out in terms of accesibility.
+
+* The `title` property will both provide a visible title in the `<ModalHeader />` (unless overwritten by it) and also label the modal for assistive technologies using the `aria-label` attribute.
+* The `priority` property will determine which role the `<Modal />` should have. A `polite` setting will cause it to have `role="dialog"`, while a setting of `assertive` will turn it into `role="alertdialog"`. The difference between the two is subtle, but worth noting. An `alertdialog` should be used to notify the user of urgent information they need to act on (most destructive actions will use this). A `dialog` on the other hand can be used to let them know of something they've done or that is about to happen (most information actions will use this). By default, `<Modal />` has the `polite` setting and, as such, the `dialog` role.
+* The `closeOnEscape` property will listen for the user pressing the `Escape` key and dismiss the modal if it's enabled **and** if the user is not currently typing in a field.
+* The `closeOnClickOutside` property will listen for the user clicking outside the modal and dismiss it if it's enabled.
+
+## Content
+
+The content of a `<Modal />` is controlled completely by passing children to it. While you can generally create any sort of content you want for your modals, to make things much easier, `<Modal />` comes out of the box with a few sub components that will make sure everything is visually styled and placed in the correct place inside the modal.
+
+* The `<ModalHeader />` will create a header for your modal, including a title and an optional close icon.
+* The `<ModalBody />` represents the main section of your modal is meant to contain all the content. Any piece of text, forms and other content such as images should go in here.
+* The `<ModalActions />` represents a section of the footer within a modal and is meant to contain any primary actions for the user.
+* The `<ModalLinks />` represents a section of the footer within a modal and is meant to contain any secondary actions for the user.
+
+### Example
+
+The general structure of the `<Modal />` will look like this:
+
+```jsx
+<Modal>
+  <ModalHeader />
+  <ModalBody />
+  <ModalLinks />
+  <ModalActions />
+</Modal>
+```
+
+> When using the provided subcomponents, the order does not matter in terms of how they are visually placed on the page. However, from a logical markup point of view, the above is the recommended order.
 
 ## Focus management
 
@@ -26,120 +52,6 @@ Focus is automatically trapped inside the modal and the focus goes to the first 
 
 > The next version should allow the developers to customise where the modal should first focus.
 
-<Canvas>
-  <Story name="Logo">
-    <Modal title="Edit datastream?">
-      <ModalHeader />
-      <ModalBody>
-        <div style={{ textAlign: 'center', margin: '2em auto', maxWidth: '80px' }}>
-          <Image
-            src="https://www.upvision.it/wp-content/uploads/2018/03/481px-Google_Ads_logo.svg-e1543860010400.png"
-            layout="fill"
-            alt="Google Ads logo"
-          />
-        </div>
-        <TextField label="Datastream title" value="Google Ads report" />
-        <TextArea
-          label="Description"
-          value=""
-          placeholder="Enter your message here"
-        />
-      </ModalBody>
-      <ModalLinks>
-        <Button size="sm" appearance="ghost">
-          <LinkIcon width="2em" />
-          Copy link
-        </Button>
-        <Button size="sm" appearance="ghost">
-          <EmbedIcon width="2em" />
-          Get embed code
-        </Button>
-      </ModalLinks>
-      <ModalActions>
-        <Button action="confirmation">Apply</Button>
-        <Button appearance="outline" action="confirmation">
-          Cancel
-        </Button>
-      </ModalActions>
-    </Modal>
-  </Story>
-</Canvas>
+## Props
 
-<Canvas>
-  <Story name="Information message">
-    <Modal title="Alert">
-      <ModalHeader />
-      <ModalBody>
-        <Message status="information">
-          This is an example of an alert message that is so important that
-          deserverd a modal dialog.
-        </Message>
-      </ModalBody>
-      <ModalActions>
-        <Button action="confirmation">Got it</Button>
-      </ModalActions>
-    </Modal>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Confirmation message">
-    <Modal title="Apply changes?">
-      <ModalHeader />
-      <ModalBody>
-        <Message status="information">
-          This will overwrite all visualisations on connected dashboard widgets.
-          This action cannot be undone.
-        </Message>
-      </ModalBody>
-      <ModalActions>
-        <Button action="confirmation">Apply</Button>
-        <Button appearance="outline" action="confirmation">
-          Cancel
-        </Button>
-      </ModalActions>
-    </Modal>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Destructive message">
-    <Modal title="Delete user?">
-      <ModalHeader />
-      <ModalBody>
-        <Message status="destructive">
-          This will permanently delte John Doe. This action cannot be undone.
-        </Message>
-      </ModalBody>
-      <ModalActions>
-        <Button action="destructive">Delete user</Button>
-        <Button appearance="outline" action="confirmation">
-          Cancel
-        </Button>
-      </ModalActions>
-    </Modal>
-  </Story>
-</Canvas>
-
-<Canvas>
-  <Story name="Form">
-    <Modal size="lg" title="Contact support">
-      <ModalHeader />
-      <ModalBody>
-        <TextField label="Email" value="" />
-        <TextField label="Subject" value="" />
-        <TextArea
-          label="Subject"
-          value=""
-          placeholder="Enter your message here"
-        />
-      </ModalBody>
-      <ModalActions>
-        <Button action="confirmation">Submit</Button>
-        <Button appearance="outline" action="confirmation">
-          Cancel
-        </Button>
-      </ModalActions>
-    </Modal>
-  </Story>
-</Canvas>
+<ArgsTable of={Modal} />
