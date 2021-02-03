@@ -1,0 +1,164 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import Image from '../Image';
+import butwhy from './assets/but-why.gif';
+import mockupsForm from './assets/mockups-form.png';
+import mockupsFormImage from './assets/mockups-form-image.png';
+import mockupsDelete from './assets/mockups-delete.png';
+import mockupsAlerts from './assets/mockups-alerts.png';
+
+
+<Meta title="Welcome" />
+
+# Welcome to the Modal Challenge
+
+What if you had to build a modal component in React, you started with a blank page and you had very few constraints and assumptions, plus total freedom? Would that stop you? Would it give you wings? Or would it make your head explode?
+
+It turns out the answer is quite a mixed bag. I went through all the emotions: sadness, guilt, anger, frustration, smiles, unicorns, frustration again, a bit more anger and finally bliss. I don't know how many stages to this there are or if anyone has documented them yet. I am certain though that the entire experience made me a better developer, a more rounded thinker and I am ultimately thankful for it.
+
+> It also made me quite tired.
+
+<Image src={butwhy} alt="Ryan Reynolds asks but why in a doctor's gown" layout="scale-down" />
+
+**I know right?!**
+
+It turns out there's a lot to think about when you're considering the bigger picture. Some people are designers and they are amazing. Others are hard-core developers and they kick ass. It's rare to find people who are fantastic at both (hint, I doubt I am one of them). So I wanted to explore what makes things tick in all areas of the design and development process. How can I find and reduce operational inefficiencies in the design and development workflow?
+
+So I started with a few problems that most product teams face:
+
+* Inconsistent designs
+* Slowness to respond to new feature requests
+* People are struggling to share resources
+* A lack of education around web accessibility
+* Everyone gets to use whatever tool they want
+* There are no standards
+* The code is inconsistent
+
+Because when you're trying to deliver design at scale, these things will hold you back.
+
+And so began my search for a silver bullet. And what better way to start than with something everyone hates: Modals.
+
+It turns out there's a lot to consider when designing and developing a modal.
+
+* How will you design the props interface?
+* What will its API look like? How many sub-components?
+* What's the correct markup for it?
+* How are we going to handle focus?
+* What about handling keyboard and mouse events?
+* What are the accessibility requirements for a modal?
+* How do we let others use it?
+* How do we educate our fellow devs to use it?
+* How are we going to introduce changes to the component?
+* How are we going to test it and deploy it?
+* What about documentation? Who is responsible for that and how do we write it?
+* What goes in the modal? Forms, buttons, messages, text, icons, images? How are those designed? What does their API look like?
+* How is the modal themed?
+* How are styles managed? JavaScript? CSS Variables?
+* Are the styles hard coded? What about letting other developers provide the styles? Should they be primitives, completely unstyled?
+* What about letting non-developers style the components?
+* What about different device widths, different browsers, different platforms? _Different planets_?
+* Lest we forget, how are we going to name it?
+* And how much coffee do you need to keep functioning through all this?
+
+That's a lot to go through by one person, I know. It's usually teams making these decisions and having these discussions over longer periods of time.
+
+**But what if they didn't have to?**
+
+What if a small group of people spent a few weeks or months in a room with lots of coffee and healthy food and sat down and decided everything and then came out of that room with a set of documented processes for how things get done. It would be a sort of system for everything. It would answer most product-related questions you could think of and if it didn't, it would have a process for coming up with the answer and adding it back to the system. It would be nicely a nicely designed...system.
+
+**I shall call it a design system!**
+
+## Constraints
+
+I didn't have a small group of people or a few weeks or months. I had me and a few days. That's what I was going to give it. Which brings me to the constraints that I applied.
+
+* I would work off a set of pre-designed mockups. Nothing fancy.
+* I would make all the decisions fast and run with them until they proved they weren't going to work and then back-track to the last known point of them working.
+* I had 3-4 days to do it.
+
+## Opportunities
+
+Before even starting, I quickly identified some opportunities.
+
+**ReactJS**
+
+I was behind on the React ecosystem and so I decided to explore some of the things that, for me, were new_er_. Things like custom hooks, focus management and trapping, error boundaries, Mdx, Storybook's [Component Story Format](https://storybook.js.org/docs/react/api/csf), to name a few.
+
+**CSS**
+
+I really, **really**, like CSS and I sort of like styled components. They all have their use cases. I wanted to know which was better for this case. Specifically, I wanted to know if I could combine the power of CSS variables with the extensibility of CSS-in-JS.
+
+**TypeScript**
+
+I work a lot with TS, and I love it to bits. I think it's a wonderful tool for teams to work together and eliminates a lot of the headaches - **after** it nearly kills you. To paraphrase Gandhi, first you ignore it, then you laugh at it, then you fight it and then you **both** win.
+
+I wanted to know how well TS plays with React, with styled components, **with CSS**?!
+
+**Design tokens**
+
+For design at scale to work, we need a way to manage all them colors, font sizes, fonts, spacings, box sizes and what have you in one place. Yes, one place to rule them all. I am quite intrigued by design tokens (watch this talk for a [great introduction](https://www.youtube.com/watch?v=wDBEc3dJJV8)) and thought they would fit the bill nicely.
+
+**Testing**
+
+Love it, hate it, there's no way you're going to make sure you're not crushing thousands of peoples hopes and dreams for the weekend if they deploy your fucked up modal on a Friday afternoon if you're not properly testing the hell out of your components.
+
+## Tools
+
+We all know we do it. First we pick the tools and then we think about the task. Admit it. That's what I did. I kind of had to - 3-4 days remember?
+
+So these are pretty much all the tools and frameworks I used to build the modal:
+
+* [React](https://reactjs.org/)
+* [Emotion](https://emotion.sh/)
+* [Babel](https://babeljs.io/)
+* [Storybook](https://storybook.js.org/)
+* [Mdx](https://mdxjs.com/)
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+* [Jest](https://jestjs.io/)
+* [ESLint](https://eslint.org/)
+* [Husky](https://typicode.github.io/husky/#/)
+* [Lint staged](https://github.com/okonet/lint-staged)
+* [Precise commits](https://github.com/nrwl/precise-commits)
+* [Prettier](https://prettier.io/)
+* [TypesScript](https://www.typescriptlang.org/)
+* [Axe](https://www.deque.com/axe/) (not the deodorant, although I used that as well)
+
+I used these to the point where I got my browser's autocomplete just the way I like it :)
+
+## Available mockups
+
+So here's what I had to work with.
+
+<Image src={mockupsFormImage} alt="a mockup of a modal with a form and image inside" layout="scale-down" />
+<Image src={mockupsForm} alt="a mockup of a modal with a form inside" layout="scale-down" />
+<Image src={mockupsDelete} alt="a mockup of a modal with a message and delete button inside" layout="scale-down" />
+<Image src={mockupsAlerts} alt="a mockup of two modals with alert messages inside" layout="scale-down" />
+
+> You can find all these mockups recreated in the [Modal Examples Stories](?path=/story/components-modal-examples--logo)
+
+## Going forward
+
+There's plenty of things to think about here. For one, this shit's hard! For two, it's really hard! Still, I enjoyed it quite a lot! I might build an accordion next. Who knows... ┐(ﾟ～ﾟ)┌
+
+While there are certainly better ways to code these components, my focus was on the processes and the thinking that goes into something like this. It's not enough to build it, you have to make sure they use it and that they use it properly. If they don't know how to use it, that's on you. [Teach them](?path=/docs/rfcs-modal--page#how-we-teach-this). Help them [adop it](?path=/docs/rfcs-modal--page#adoption-strategy). And learn from them!
+
+Throughout the experience, I found a few obvious wins.
+
+* TypeScript will give you a much better chance to do things right both during development and afterwards once you use the component.
+* Writing the tests and the stories will help solidify your knowledge of the externals of the component. Here, you become the consumer of the component and you begin to think from their perspective. It's here that I answered most questions like, how would I use this component if I wanted such and such? Here, you're not concerned with how it's implemented, but rather with how it behaves once you use it.
+* You can use TypeScript with CSS. Ha! Kind of, let's not get ahead of ourselves. But by placing CSS variables _inside_ of the typed constants, you get the best of both worlds: [type safety for your colors](https://github.com/tricinel/modal-challenge/blob/master/src/tokens/colors.ts), autocomplete in your code editor, the power of CSS to style things and you enforce consistency across all your components.
+* For consistency, design tokens are the way to go, no two ways about it.
+
+And a few things I left out, due to lack of time and knowledge mostly:
+
+* Design tokens, seems to me, could play really well with something like [theme-ui](https://theme-ui.com/) or [styled-system](https://styled-system.com/).
+* There were a few gimmicks I could have employed for future proofing the development experience. Perhaps implementing something like a [Dangerfile](https://danger.systems/js/guides/the_dangerfile.html) so I could automate some code review chores.
+* More testing can definitely be done with [Cypress](https://www.cypress.io/) and we could definitely benefit from using [Chromatic](https://www.chromatic.com/) for visual testing.
+* We can't use CSS variables in media queries...sad...I know! I didn't have enough time to explore this.
+
+You can find the code for this on my GitHub. As the cool kids say, smash that button!
+
+[![GitHub watchers](https://img.shields.io/github/watchers/tricinel/modal-challenge?label=Github&style=for-the-badge)](https://github.com/tricinel/modal-challenge)
+
+Nothing else comes to mind, I'm sure I would have done a better job if I documented everything as I experienced the failures along the way (there were a lot of them). I'd just like to add that if you have 3-4 days to waste, it's not a bad idea to spend them like this. Good luck!
+
+> Did you notice I only mentioned **design system** once during this whole thing?! It's twice now, but whatever...
