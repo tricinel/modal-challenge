@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Modal } from '../../Modal';
+import ErrorFallback from '..';
+
+<Meta
+  title="Components/Status/ErrorFallback"
+  component={ErrorFallback}
+  parameters={{ viewMode: 'canvas' }}
+/>
+
+# ErrorFallback
+
+The `<ErrorFallback />` is a special component that handles runtime errors in your application. You can read more about it [here](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react).
+
+> **Error boundaries do not catch errors for:**
+>
+> * Event handlers
+> * Async code
+> * Server side rendering
+> * Errors thrown in the Fallback component itself (which is why we keep that one simple)
+
+<Canvas>
+  <Story name="ErrorFallback" parameters={{ controls: { hideNoControlsWarning: true } }}>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <Modal title="My modal" />
+    </ErrorBoundary>
+  </Story>
+</Canvas>

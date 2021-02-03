@@ -1,20 +1,21 @@
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  viewMode: "docs",
-  previewTabs: { "storybook/docs/panel": { index: -1 } },
+  actions: { argTypesRegex: '^on[A-Z].*' },
+  viewMode: 'docs',
+  previewTabs: { 'storybook/docs/panel': { index: -1 } },
   options: {
     storySort: {
       order: [
-        "Introduction",
-        "Components",
+        'Introduction',
+        'Components',
         [
-          "Modal",
-          ["Docs", "Examples", "Subcomponents"],
-          "Button",
-          "Status",
-          "Form",
-          "Image",
-          "Icons",
+          'Modal',
+          ['Docs', 'Examples', 'Subcomponents'],
+          'Button',
+          'Status',
+          ['Message', 'ErrorFallback'],
+          'Form',
+          'Image',
+          'Icons',
         ],
       ],
     },
