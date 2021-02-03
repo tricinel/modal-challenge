@@ -14,6 +14,7 @@ describe('Modal render tests', () => {
       </Modal>
     );
     expect(screen.getByLabelText('My modal')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
   test('render a Modal component with just a ModalBody', () => {
@@ -114,6 +115,15 @@ describe('Modal render tests', () => {
       </Modal>
     );
     expect(screen.queryByLabelText('My modal')).not.toBeInTheDocument();
+  });
+
+  test('render a Modal component that is an alertdialog', () => {
+    render(
+      <Modal title="My modal" priority="assertive">
+        <a href="test">Modal content</a>
+      </Modal>
+    );
+    expect(screen.getByRole('alertdialog')).toBeInTheDocument();
   });
 });
 

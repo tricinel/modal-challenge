@@ -6,7 +6,7 @@ import Box from '../Box';
 import Overlay from '../Overlay';
 import ModalContext from './ModalContext';
 import { radii, breakpoints, sizes } from '../../tokens';
-import type { BoxSize } from '../../core/types';
+import type { BoxSize, Priority } from '../../core/types';
 import useClickOutside from '../../hooks/useClickOutside';
 import useEscapePressed from '../../hooks/useEscapePressed';
 
@@ -45,12 +45,16 @@ export interface ModalProps {
   open?: boolean;
   /** Determine the size of the modal window */
   size?: BoxSize;
+  /** Determines what type of dialog this is based: dialog or alertdialog */
+  priority?: Priority;
+  /** Whether the modal should be closed when the user presses Escape */
+  closeOnEscape?: boolean;
+  /** Whether the modal should be closed when the user clicks outside of it */
+  closeOnClickOutside?: boolean;
   /**
    * The content to display as the inside the modal.
    * This will usually include a ModalHeader, ModalBody, ModalLinks and ModalActions.
    */
-  closeOnEscape?: boolean;
-  closeOnClickOutside?: boolean;
   children: ReactNode;
 }
 
@@ -60,6 +64,7 @@ export default function Modal({
   size = 'base',
   closeOnEscape = true,
   closeOnClickOutside = true,
+  priority = 'polite',
   children
 }: ModalProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(open);
@@ -83,7 +88,7 @@ export default function Modal({
           ref={modalWrapperRef}
           aria-modal="true"
           aria-label={title}
-          role="alertdialog"
+          role={priority === 'polite' ? 'dialog' : 'alertdialog'}
           tabIndex={-1}
           size={size}
         >
