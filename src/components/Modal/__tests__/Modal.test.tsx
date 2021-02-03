@@ -1,12 +1,31 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import userEvent from '@testing-library/user-event';
 import { Modal, ModalBody, ModalHeader, ModalActions, ModalLinks } from '..';
 import Button from '../../Button';
 import { TextArea, TextField } from '../../Form';
 import { EmbedIcon, LinkIcon } from '../../../icons';
 
 describe('Modal render tests', () => {
+  beforeEach(() => {
+    // This surpresses React error boundary logs for testing intentionally
+    // thrown errors, like in some test cases in this suite.
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("throw an error if a Modal component doesn't have a focusable element", () => {
+    expect(() =>
+      render(<Modal title="My modal">Modal content</Modal>)
+    ).toThrowErrorMatchingInlineSnapshot(
+      `"Your focus-trap must have at least one container with at least one tabbable node in it at all times"`
+    );
+  });
+
   test('render a Modal component with default values', () => {
     render(
       <Modal title="My modal">
@@ -128,9 +147,7 @@ describe('Modal render tests', () => {
 });
 
 describe('Modal events', () => {
-  // TODO: This doesn't work just yet
-  // eslint-disable-next-line jest/no-disabled-tests
-  test.skip('render a Modal component and close it by clicking on the outside container', () => {
+  test('render a Modal component and close it by clicking on the outside container', () => {
     render(
       <Modal title="My modal">
         <ModalHeader />
@@ -140,7 +157,7 @@ describe('Modal events', () => {
       </Modal>
     );
     expect(screen.getByLabelText('My modal')).toBeInTheDocument();
-    fireEvent.click(document.body);
+    userEvent.click(document.body);
     expect(screen.queryByLabelText('My modal')).not.toBeInTheDocument();
   });
 
@@ -188,12 +205,10 @@ describe('Modal events', () => {
     expect(screen.getByLabelText('My modal')).toBeInTheDocument();
   });
 
-  // TODO: This doesn't work just yet
-  // eslint-disable-next-line jest/no-disabled-tests
-  test.skip('render a Modal component and trap the focus in it', () => {
+  test('render a Modal component and trap the focus in it', async () => {
     render(
       <Modal title="My modal">
-        <ModalHeader hideClose={true} />
+        <ModalHeader />
         <ModalBody>
           <TextField label="Enter text" value="" />
         </ModalBody>
@@ -203,18 +218,25 @@ describe('Modal events', () => {
       </Modal>
     );
 
+    await waitFor(() => {
+      // The Close icon in the header should have focus
+      expect(screen.getByLabelText('Close')).toHaveFocus();
+    });
+
     // We press TAB once
-    fireEvent.keyDown(document.activeElement ?? document.body, { key: 'Tab' });
+    userEvent.tab();
     // We expect the TextField to have focus
     expect(screen.getByLabelText('Enter text')).toHaveFocus();
+
     // We press TAB again
-    fireEvent.keyDown(document.activeElement ?? document.body, { key: 'Tab' });
+    userEvent.tab();
     // We expect the Button to have focus
     expect(screen.getByText('Click me')).toHaveFocus();
+
     // We press TAB yet again
-    fireEvent.keyDown(document.activeElement ?? document.body, { key: 'Tab' });
-    // We expect to move the focus back to the TextField
-    expect(screen.getByLabelText('Enter text')).toHaveFocus();
+    userEvent.tab();
+    // We expect to move the focus back to the Close icon in the header
+    expect(screen.getByLabelText('Close')).toHaveFocus();
   });
 });
 
