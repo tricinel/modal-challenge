@@ -9,17 +9,17 @@ import { ExampleOnBlur, ExampleOnChange } from './Examples';
 
 # TextField
 
-TextFields are text inputs that allow users to use their keyboard to enter text into forms.
+`<TextField />`s are text inputs that allow users to use their keyboard to enter text into forms.
 
-Install: `yarn add '@modal/textfield`
+Install: `yarn add '@modal/form`
 
-Usage: `import Button from '@modal/textfield';`
+Usage: `import { TextField } from '@modal/form';`
 
 ## Options
 
 ### Label
 
-You must provide a visual label for the TextField using the `label` prop. If the TextField is required, the `isRequired` and `requiredIndicatorType` props can be used to show a required state. If it is not required, you can choose to show the text `(optional)` for the fields by using the props `requiredIndicatorType` and `alwaysShowRequiredIndicator`.
+You must provide a visual label for the `<TextField />` using the `label` prop. If the `<TextField />` is required, the `isRequired` and `requiredIndicatorType` props can be used to show a required state. If it is not required, you can choose to show the text `(optional)` for the fields by using the props `requiredIndicatorType` and `alwaysShowRequiredIndicator`.
 
 <Canvas>
   <Story name="Label" args={{ label: 'Enter your name' }}>
@@ -55,7 +55,7 @@ You must provide a visual label for the TextField using the `label` prop. If the
 
 ### Value and onChange
 
-A TextField's value is empty by default. You can provide a value use the `value` prop. Be sure to also have the `onChange` handler attached to the TextField. Placeholder text can be used to describe what the expected value should be or to hint at formatting for the TextField. Placeholder text only appears when the TextField's value is empty, and should not be used as a substitute for labeling the component with a visible label. Additionally, a hint text can be added to make it clear for the user what is expected of them.
+A `<TextField />`'s value is empty by default. You can provide a value use the `value` prop. Be sure to also have the `onChange` handler attached to the `<TextField />`. Placeholder text can be used to describe what the expected value should be or to hint at formatting for the `<TextField />`. Placeholder text only appears when the `<TextField />`'s value is empty, and should not be used as a substitute for labeling the component with a visible label. Additionally, a hint text can be added to make it clear for the user what is expected of them.
 
 <Canvas>
   <Story
@@ -72,7 +72,7 @@ A TextField's value is empty by default. You can provide a value use the `value`
 
 ### States
 
-A TextField can be disabled by using the `isDisabled` prop and made to be `readonly` using the `isReadonly` prop. Setting either of these props not only changes the behavior of the field, but also the visual styling. You can also autofocus on the TextField immediately after render by using the `autoFocus` prop.
+A `<TextField />` can be disabled by using the `isDisabled` prop and made to be `readonly` using the `isReadonly` prop. Setting either of these props not only changes the behavior of the field, but also the visual styling. You can also autofocus on the `<TextField />` immediately after render by using the `autoFocus` prop.
 
 <Canvas>
   <Story name="Disabled" args={{ label: 'Enter your name', isDisabled: true }}>
@@ -94,7 +94,7 @@ A TextField can be disabled by using the `isDisabled` prop and made to be `reado
 
 ## Validation
 
-TextFields can display a validation state to communicate to the user whether the current value is valid or invalid. This requires that you implement your own validation functions and pass them to the TextField. Internally, the TextField will check that the value entere by the user passes each of the validation functions when the field is blurred (i.e. **after** the user has entered a value and moved away from the field). When a field is invalid, its visual state changes and a validation message is displayed underneath.
+`<TextField />`s can display a validation state to communicate to the user whether the current value is valid or invalid. This requires that you implement your own validation functions and pass them to the `<TextField />`. Internally, the `<TextField />` will check that the value entere by the user passes each of the validation functions when the field is blurred (i.e. **after** the user has entered a value and moved away from the field). When a field is invalid, its visual state changes and a validation message is displayed underneath.
 
 <Canvas>
   <Story
@@ -122,7 +122,7 @@ TextFields can display a validation state to communicate to the user whether the
 
 ## Events
 
-TextFields support the `onBlur` and `onChange` events.
+`<TextField />`s support the `onBlur` and `onChange` events.
 
 <ExampleOnChange />
 <ExampleOnBlur />

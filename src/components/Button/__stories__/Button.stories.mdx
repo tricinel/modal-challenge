@@ -33,13 +33,13 @@ Buttons must have a visible label, be it in the form of the button text, or an i
 
 ## Accessibility
 
-If you choose to use an icon or an image as a child, be aware that an alternative text label must be provided to identify the button for accessibility. This should be added using one of the `aria-label` or `aria-labeledby` props.
+If you choose to use an icon or an image as a child, be aware that an alternative text label must be provided to identify the button for accessibility. This should be added using one of the `aria-label` or `aria-labelledby` props.
 
 ## Visual options
 
 ### Status
 
-`Button` supports style props, which enable you to use theme variables for styling to ensure consistency with the other components.
+`<Button />` supports style props, which enable you to use theme variables for styling to ensure consistency with the other components.
 
 #### Confirmation
 
@@ -83,7 +83,7 @@ A destructive button is considered a secondary action button. It is meant to hav
 
 ### Appearances
 
-`Button` supports 3 distinct appearances, which enable you to give your buttons different visual importance on the page.
+`<Button />` supports 3 distinct appearances, which enable you to give your buttons different visual importance on the page.
 
 #### Full
 
@@ -111,7 +111,7 @@ A destructive button is considered a secondary action button. It is meant to hav
 
 ### Icons
 
-Icons can be used in buttons to provide additional clarity. Icons should not be used for decoration. If you're using an icons as the only child of the Button, you must add an alternative text representation, by using the `aria-label` or `aria-labeledby` props.
+Icons can be used in buttons to provide additional clarity. Icons should not be used for decoration. If you're using an icons as the only child of the Button, you must add an alternative text representation, by using the `aria-label` or `aria-labelledby` props.
 
 <Canvas>
   <Story name="Full with icon" args={{ appearance: 'full' }}>

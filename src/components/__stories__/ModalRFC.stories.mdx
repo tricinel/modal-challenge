@@ -42,7 +42,7 @@ function DeleteUserModal() {
 
 A modal dialog is a separate window that appears on top of the main content window and prevents the user from interacting with the body of the page. While there are plenty of warnings of why they should not be used, there are certainly circumstances where they make sense and they can even enhance the experience of our users.
 
-Looking at our existing products, we've noticed some tasks the users have problems with.
+Looking at our existing products, I've noticed some tasks the users have problems with.
 
 1. Users perform destructive, irreversible actions, with critical (and sometimes unintended) consequences. For example, deleting data is a destructive action and we should require a confirmation from the user before performing it.
 2. Users have their workflow disrupted when they are asked to enter some critical information before being allowed to continue with their work. For example, their session has expired and they need to log in again if they want to continue working.
@@ -166,7 +166,7 @@ We can now move our confirmation button inside this component:
 
 ### ModalLinks
 
-The `<ModalLinks />` component represents a section of the footer within a `<Modal />`. It is meant to encompass secondary action buttons or links that are meant to have a low visual emphasis. The container is placed to the left of the Modal window, in the footer. The ModalLinks should not be the only actions in a `<Modal />`.
+The `<ModalLinks />` component represents a section of the footer within a `<Modal />`. It is meant to encompass secondary action buttons or links that are meant to have a low visual emphasis. The container is placed to the left of the Modal window, in the footer. The `<ModalLinks />` should not be the only actions in a `<Modal />`.
 
 We can add a link to an information page to help the user make up their mind:
 
@@ -187,7 +187,7 @@ We can add a link to an information page to help the user make up their mind:
 
 ## Internal state
 
-The `<Modal />` handles its own internal state through a `ModalContext`. This will allow it to handle its own open/closed state, pass certain props to sub components that needed and handle focus.
+The `<Modal />` handles its own internal state through a `ModalContext`. This will allow it to handle its own open/closed state, pass certain props to sub components that need them and handle focus.
 
 The context object looks like this:
 
@@ -211,10 +211,10 @@ From an accessibility stand point, we need to make sure the component meets best
 * `Escape` closes the modal. The exception to this rule is if the user is typing in a form, pressing `Esc` will not close the modal.
 * `Tab` moves the focus inside the modal. See more on [focus management](#focus-management).
 
-This event can be disabled through the `closeOnEscape` prop.
+The close event can be disabled through the `closeOnEscape` prop.
 
 ```jsx
-<Modal title="Are you sure?"  closeOnEscape={false}>
+<Modal title="Are you sure?" closeOnEscape={false}>
   <a href="#">Yes</a>
 </Modal>
 ```
@@ -226,7 +226,7 @@ This event can be disabled through the `closeOnEscape` prop.
 This event can be disabled through the `closeOnClickOutside` prop.
 
 ```jsx
-<Modal title="Are you sure?"  closeOnClickOutside={false}>
+<Modal title="Are you sure?" closeOnClickOutside={false}>
   <a href="#">Yes</a>
 </Modal>
 ```
