@@ -10,6 +10,7 @@ const MessageBox = styled(Box.withComponent('div'))`
   gap: ${space.xs};
   font-family: ${fonts.body};
   font-size: ${fontSizes.sm};
+  text-align: center;
   padding: ${space.sm} 0;
 
   svg {
@@ -17,8 +18,9 @@ const MessageBox = styled(Box.withComponent('div'))`
     width: ${fontSizes['3xl']};
   }
 
-  @media (min-width: ${breakpoints.md}em) {
+  @media (min-width: ${breakpoints.sm}em) {
     flex-direction: row;
+    text-align: left;
 
     svg {
       align-self: left;
