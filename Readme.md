@@ -45,6 +45,23 @@ It turns out there's a lot to consider when designing and developing a modal. He
 
 There's plenty of things to think about here. For one, this shit's hard! For two, it's really hard! Still, I enjoyed it quite a lot! I might build an accordion next. Who knows... ┐(ﾟ～ﾟ)┌
 
+## Demo
+
 Head on over to the [Storybook page](https://modal-challenge.netlify.app/) where I have answers to some of these things.
+
+### Install locally
+
+Fork, clone, you know the drill...
+
+`yarn install`
+
+**Run all the things**
+
+```sh
+yarn lint
+yarn typecheck
+yarn test
+yarn storybook
+```
 
 [build-status-badge]: https://img.shields.io/circleci/build/github/tricinel/modal-challenge?label=circleci&style=flat-square
