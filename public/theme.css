@@ -48,17 +48,17 @@
   --box-size-xs: 24em;
 
   /* Colors */
-  --color-destructive-100: hsl(9,76.92%,94.9%);
-  --color-destructive-200: hsl(7.29,79.04%,55.1%);
-  --color-destructive-300: hsl(7.25,78.84%,37.06%);
+  --color-destructive-100: hsl(9, 85%, 74%);
+  --color-destructive-200: hsl(7, 75%, 44%);
+  --color-destructive-300: hsl(7, 77%, 31%);
   --color-destructive-400: hsl(7,78.95%,14.9%);
   --color-neutral-100: hsl(197.14,28%,95.1%);
   --color-neutral-200: hsl(193.22,25.76%,55.1%);
   --color-neutral-300: hsl(192.86,25.61%,32.16%);
   --color-neutral-400: hsl(192,26.32%,14.9%);
-  --color-information-100: hsl(203.33,69.23%,94.9%);
-  --color-information-200: hsl(204.38,69.57%,54.9%);
-  --color-information-300: hsl(204.31,69.86%,42.94%);
+  --color-information-100: hsl(203, 63%, 69%);
+  --color-information-200: hsl(204, 66%, 39%);
+  --color-information-300: hsl(204, 68%, 31%);
   --color-information-400: hsl(204.91,68.83%,15.1%);
   --color-confirmation-100: hsl(216,76.92%,94.9%);
   --color-confirmation-200: hsl(215.54,80%,54.9%);
