@@ -154,6 +154,7 @@ And a few things I left out, due to lack of time and knowledge mostly:
 * There were a few gimmicks I could have employed for future proofing the development experience. Perhaps implementing something like a [Dangerfile](https://danger.systems/js/guides/the_dangerfile.html) so I could automate some code review chores.
 * More testing can definitely be done with [Cypress](https://www.cypress.io/) and we could definitely benefit from using [Chromatic](https://www.chromatic.com/) for visual testing.
 * We can't use CSS variables in media queries...sad...I know! I didn't have enough time to explore this.
+* There's still something that rubs me the wrong way about CSS in JS. There's a runtime cost involved and I wish I didn't have to pay it. Since the props can change for a styled component, the browser will have to generate and update the `<style>` tags in response to those changes. That means some overhead that I wish we could avoid. I want all the benefits of CSS in JS (scope per component, composition inline, use props from the component, generate the unique class names, template strings, etc) and then do all this at build time. Go away after that. Give me the benefits of just CSS (variables, no runtime, CSS downloaded and parsed separately from JS). So I've been looking recently at two solutions: [Compiled](https://github.com/atlassian-labs/compiled) and [Linaria](https://github.com/callstack/linaria) and they both look promising.
 
 You can find the code for this on my GitHub. As the cool kids say, smash that button!
 
