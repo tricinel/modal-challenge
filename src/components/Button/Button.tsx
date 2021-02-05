@@ -28,8 +28,27 @@ const ButtonBox = styled(Box.withComponent('button'))`
     filter: saturate(60%);
   }
 
-  &:focus:not(:disabled) {
-    box-shadow: 0 0 0 2px currentColor, 0 0 0 4px ${colors['neutral-200']};
+  /* These get then set from the individual buttons */
+  --button-focus-box-shadow-color-inner: currentColor;
+  --button-focus-box-shadow-color-outer: ${colors['neutral-200']};
+
+  &:focus {
+    /* Fallback for browsers without :focus-visible */
+    box-shadow: 0 0 0 2px var(--button-focus-box-shadow-color-inner),
+      0 0 0 4px var(--button-focus-box-shadow-color-outer);
+    outline: none;
+  }
+
+  &:focus:not(:focus-visible) {
+    /* No indicator for browsers with :focus-visible */
+    box-shadow: none;
+    outline: none;
+  }
+
+  &:focus-visible {
+    /* Keyboard-only focus ring */
+    box-shadow: 0 0 0 2px var(--button-focus-box-shadow-color-inner),
+      0 0 0 4px var(--button-focus-box-shadow-color-outer);
     outline: none;
   }
 `;

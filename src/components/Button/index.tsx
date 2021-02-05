@@ -41,9 +41,8 @@ function styles(
       color: ${outline ? bg : color};
       font-size: ${fontSizes[size]};
 
-      &:focus:not(:disabled) {
-        box-shadow: 0 0 0 2px ${colors['white-100']}, 0 0 4px 2px ${bg};
-      }
+      --button-focus-box-shadow-color-inner: ${colors['white-100']};
+      --button-focus-box-shadow-color-outer: ${bg};
 
       &:hover:not(:disabled),
       &:active:not(:disabled) {
